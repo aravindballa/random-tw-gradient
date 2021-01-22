@@ -60,7 +60,7 @@ export default function IndexPage() {
         <div className="md:grid grid-cols-2">
           <div>
             <button
-              className="py-2 px-6 bg-purple-400 text-purple-900 rounded shadow-md focus:outline-none hover:bg-purple-300 focus:border-purple-300 border border-transparent select-none"
+              className="py-2 px-6 mb-4 bg-purple-400 text-purple-900 rounded shadow-md focus:outline-none hover:bg-purple-300 focus:border-purple-300 border border-transparent select-none"
               onClick={handleRandomise}
             >
               Randomize{" "}
