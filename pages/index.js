@@ -93,7 +93,7 @@ export default function IndexPage() {
               <div className="text-xs font-bold uppercase text-gray-500">
                 CSS
               </div>
-              <code className="text-sm">{css}</code>
+              <code className="text-sm">background: {css}</code>
             </div>
           </div>
         </div>
