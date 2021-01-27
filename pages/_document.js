@@ -9,7 +9,23 @@ class MyDocument extends Document {
   render() {
     return (
       <Html className="dark">
-        <Head />
+        <Head>
+          <title>Random Tailwind Gradient 🌈</title>
+          <meta
+            name="description"
+            content="Generate gradients using colors from Tailwind CSS"
+          />
+          <meta
+            name="og:image"
+            content="https://random-tailwind-gradient.vercel.app/cover.png"
+          />
+          <script
+            async
+            defer
+            data-domain="random-tailwind-gradient.vercel.app"
+            src="https://plausible.io/js/plausible.js"
+          ></script>
+        </Head>
         <body>
           <Main />
           <NextScript />

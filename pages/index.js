@@ -55,7 +55,7 @@ export default function IndexPage() {
     <div className="min-h-screen grid place-items-center">
       <div className="px-8 w-full" style={{ maxWidth: "80ch" }}>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-          Random Tailwind Gradient 🎨
+          Random Tailwind Gradient 🌈
         </h1>
         <div className="md:grid grid-cols-2">
           <div>
@@ -93,7 +93,7 @@ export default function IndexPage() {
               <div className="text-xs font-bold uppercase text-gray-500">
                 CSS
               </div>
-              <code className="text-sm">background: {css}</code>
+              <code className="text-sm">background: {css};</code>
             </div>
           </div>
         </div>
