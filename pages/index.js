@@ -1,5 +1,14 @@
 import colors from "tailwindcss/colors";
-// import plugin from "tailwindcss/lib/plugins/gradientColorStops";
+import {
+  ArrowDown,
+  ArrowDownLeft,
+  ArrowDownRight,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ArrowUpLeft,
+  ArrowUpRight,
+} from "../components/icons";
 
 const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -23,31 +32,46 @@ const isNotAllowed = (color) => {
   return false;
 };
 
-const getRandomColor = () => {
+const getRandomColor = (prevColor = "") => {
   const allColors = Object.keys(colors);
   const color = getRandomItem(allColors);
-  return isNotAllowed(color) ? getRandomColor() : color;
+  return isNotAllowed(color) || prevColor === color ? getRandomColor() : color;
 };
 
-const getGradient = (firstColor, secondColor, intensity = 300) => {
-  return `bg-gradient-to-br from-${firstColor}-${intensity} to-${secondColor}-${intensity}`;
+const getGradient = (
+  firstColor,
+  secondColor,
+  intensity = 300,
+  direction = "br"
+) => {
+  return `bg-gradient-to-${direction} from-${firstColor}-${intensity} to-${secondColor}-${intensity}`;
 };
+
+const DirectionButton = ({ active, ...rest }) => (
+  <button
+    {...rest}
+    className={`w-12 h-12 p-3 rounded border border-gray-700 outline-none focus:outline-none focus:border-gray-600 hover:border-gray-600 ${
+      active ? "bg-gray-800" : ""
+    }`}
+  />
+);
 
 export default function IndexPage() {
   const [randomGradient, setRandomGradient] = React.useState("bg-gray-300");
   const [css, setCSS] = React.useState("");
   const gradientCardRef = React.useRef();
 
-  const [firstColor, setFirstColor] = React.useState(getRandomColor());
-  const [secondColor, setSecondColor] = React.useState(getRandomColor());
+  const [colors, setColors] = React.useState([
+    getRandomColor(),
+    getRandomColor(),
+  ]);
   const [intensity, setIntensity] = React.useState(300);
+  const [direction, setDirection] = React.useState("br");
 
   const handleRandomise = () => {
-    setFirstColor(getRandomColor());
-    setSecondColor(getRandomColor());
-    setTimeout(() => {
-      setRandomGradient(getGradient(firstColor, secondColor, intensity));
-    }, 0);
+    const firstColor = getRandomColor();
+    const secondColor = getRandomColor(firstColor);
+    setColors([firstColor, secondColor]);
   };
 
   const handleIntensityChange = (e) => {
@@ -55,12 +79,16 @@ export default function IndexPage() {
     setIntensity(Math.floor(value / 100) * 100);
   };
 
-  // load the colors after the component mounts
-  React.useEffect(handleRandomise, []);
+  const getDirectionButtonProps = (curDirection) => ({
+    active: curDirection === direction,
+    onClick: () => {
+      setDirection(curDirection);
+    },
+  });
 
   React.useEffect(() => {
-    setRandomGradient(getGradient(firstColor, secondColor, intensity));
-  }, [intensity]);
+    setRandomGradient(getGradient(colors[0], colors[1], intensity, direction));
+  }, [colors, intensity, direction]);
 
   React.useEffect(() => {
     if (gradientCardRef && gradientCardRef.current) {
@@ -96,7 +124,9 @@ export default function IndexPage() {
               </svg>
             </button>
 
-            <div className="text-xs uppercase text-gray-500">Intensity</div>
+            <div className="text-xs uppercase text-gray-500 select-none">
+              Intensity
+            </div>
             <input
               className="appearance-none mt-2 mb-4 bg-gray-700 hover:bg-gray-600 rounded-lg outline-none h-2 w-64 slider"
               type="range"
@@ -105,6 +135,37 @@ export default function IndexPage() {
               value={intensity}
               onChange={handleIntensityChange}
             />
+
+            <div className="text-xs uppercase text-gray-500 select-none">
+              Direction
+            </div>
+            <div className="grid grid-cols-3 gap-2 mt-2 mb-4 w-max text-gray-200">
+              <DirectionButton {...getDirectionButtonProps("tl")}>
+                <ArrowUpLeft />
+              </DirectionButton>
+              <DirectionButton {...getDirectionButtonProps("t")}>
+                <ArrowUp />
+              </DirectionButton>
+              <DirectionButton {...getDirectionButtonProps("tr")}>
+                <ArrowUpRight />
+              </DirectionButton>
+              <DirectionButton {...getDirectionButtonProps("l")}>
+                <ArrowLeft />
+              </DirectionButton>
+              <div className="w-12 h-12"></div>
+              <DirectionButton {...getDirectionButtonProps("r")}>
+                <ArrowRight />
+              </DirectionButton>
+              <DirectionButton {...getDirectionButtonProps("bl")}>
+                <ArrowDownLeft />
+              </DirectionButton>
+              <DirectionButton {...getDirectionButtonProps("b")}>
+                <ArrowDown />
+              </DirectionButton>
+              <DirectionButton {...getDirectionButtonProps("br")}>
+                <ArrowDownRight />
+              </DirectionButton>
+            </div>
           </div>
 
           {/* RIGHT column */}
