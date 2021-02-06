@@ -10,7 +10,6 @@ class MyDocument extends Document {
     return (
       <Html className="dark">
         <Head>
-          <title>Random Tailwind Gradient 🌈</title>
           <meta
             name="description"
             content="Generate gradients using colors from Tailwind CSS"

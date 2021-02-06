@@ -12,8 +12,8 @@ body {
 }
 
 /* Write your own custom component styles here */
-.btn-blue {
-  @apply px-4 py-2 font-bold text-white bg-blue-500 rounded;
+.slider::-webkit-slider-thumb {
+  @apply appearance-none bg-purple-400 w-4 h-4 rounded-full;
 }
 
 /* Start purging... */

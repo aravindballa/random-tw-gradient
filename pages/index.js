@@ -29,8 +29,8 @@ const getRandomColor = () => {
   return isNotAllowed(color) ? getRandomColor() : color;
 };
 
-const getRandomGradient = () => {
-  return `bg-gradient-to-br from-${getRandomColor()}-300 to-${getRandomColor()}-300`;
+const getGradient = (firstColor, secondColor, intensity = 300) => {
+  return `bg-gradient-to-br from-${firstColor}-${intensity} to-${secondColor}-${intensity}`;
 };
 
 export default function IndexPage() {
@@ -38,12 +38,29 @@ export default function IndexPage() {
   const [css, setCSS] = React.useState("");
   const gradientCardRef = React.useRef();
 
+  const [firstColor, setFirstColor] = React.useState(getRandomColor());
+  const [secondColor, setSecondColor] = React.useState(getRandomColor());
+  const [intensity, setIntensity] = React.useState(300);
+
   const handleRandomise = () => {
-    setRandomGradient(getRandomGradient());
+    setFirstColor(getRandomColor());
+    setSecondColor(getRandomColor());
+    setTimeout(() => {
+      setRandomGradient(getGradient(firstColor, secondColor, intensity));
+    }, 0);
+  };
+
+  const handleIntensityChange = (e) => {
+    const { value } = e.target;
+    setIntensity(Math.floor(value / 100) * 100);
   };
 
   // load the colors after the component mounts
   React.useEffect(handleRandomise, []);
+
+  React.useEffect(() => {
+    setRandomGradient(getGradient(firstColor, secondColor, intensity));
+  }, [intensity]);
 
   React.useEffect(() => {
     if (gradientCardRef && gradientCardRef.current) {
@@ -58,9 +75,10 @@ export default function IndexPage() {
           Random Tailwind Gradient 🌈
         </h1>
         <div className="md:grid grid-cols-2">
-          <div>
+          {/* LEFT column */}
+          <div className="">
             <button
-              className="py-2 px-6 mb-4 bg-purple-400 text-purple-900 rounded shadow-md focus:outline-none hover:bg-purple-300 focus:border-purple-300 border border-transparent select-none"
+              className="block py-2 px-6 mb-4 bg-purple-400 text-purple-900 rounded shadow-md focus:outline-none hover:bg-purple-300 focus:border-purple-300 border border-transparent select-none"
               onClick={handleRandomise}
             >
               Randomize{" "}
@@ -77,7 +95,19 @@ export default function IndexPage() {
                 <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
               </svg>
             </button>
+
+            <div className="text-xs uppercase text-gray-500">Intensity</div>
+            <input
+              className="appearance-none mt-2 mb-4 bg-gray-700 hover:bg-gray-600 rounded-lg outline-none h-2 w-64 slider"
+              type="range"
+              min={100}
+              max={900}
+              value={intensity}
+              onChange={handleIntensityChange}
+            />
           </div>
+
+          {/* RIGHT column */}
           <div>
             <div
               ref={gradientCardRef}
@@ -97,6 +127,8 @@ export default function IndexPage() {
             </div>
           </div>
         </div>
+
+        {/* Footer */}
         <div className="mt-16 text-gray-400 text-center">
           Made with ❤️ by{" "}
           <a href="https://twitter.com/aravindballa">Aravind Balla</a>
