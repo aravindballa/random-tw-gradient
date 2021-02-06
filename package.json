@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "next": "latest",
+    "postcss-css-variables": "^0.17.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

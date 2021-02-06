@@ -1,4 +1,5 @@
-import colors from "tailwindcss/colors";
+import { getGradient, getRandomColor } from "../lib";
+
 import {
   ArrowDown,
   ArrowDownLeft,
@@ -10,43 +11,6 @@ import {
   ArrowUpRight,
 } from "../components/icons";
 
-const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-const isNotAllowed = (color) => {
-  if (!color.match(/^[a-z]+$/)) return true;
-  const unallowed = [
-    "black",
-    "white",
-    "rose",
-    "lime",
-    "violet",
-    "emerald",
-    "fuchsia",
-    "orange",
-    "cyan",
-    "amber",
-    "teal",
-  ];
-  if (unallowed.includes(color)) return true;
-
-  return false;
-};
-
-const getRandomColor = (prevColor = "") => {
-  const allColors = Object.keys(colors);
-  const color = getRandomItem(allColors);
-  return isNotAllowed(color) || prevColor === color ? getRandomColor() : color;
-};
-
-const getGradient = (
-  firstColor,
-  secondColor,
-  intensity = 300,
-  direction = "br"
-) => {
-  return `bg-gradient-to-${direction} from-${firstColor}-${intensity} to-${secondColor}-${intensity}`;
-};
-
 const DirectionButton = ({ active, ...rest }) => (
   <button
     {...rest}
@@ -56,22 +20,23 @@ const DirectionButton = ({ active, ...rest }) => (
   />
 );
 
+const getTwoDifferentColors = () => {
+  const firstColor = getRandomColor();
+  const secondColor = getRandomColor(firstColor);
+  return [firstColor, secondColor];
+};
+
 export default function IndexPage() {
   const [randomGradient, setRandomGradient] = React.useState("bg-gray-300");
   const [css, setCSS] = React.useState("");
   const gradientCardRef = React.useRef();
 
-  const [colors, setColors] = React.useState([
-    getRandomColor(),
-    getRandomColor(),
-  ]);
+  const [colors, setColors] = React.useState(getTwoDifferentColors);
   const [intensity, setIntensity] = React.useState(300);
   const [direction, setDirection] = React.useState("br");
 
   const handleRandomise = () => {
-    const firstColor = getRandomColor();
-    const secondColor = getRandomColor(firstColor);
-    setColors([firstColor, secondColor]);
+    setColors(getTwoDifferentColors());
   };
 
   const handleIntensityChange = (e) => {
