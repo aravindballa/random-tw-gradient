@@ -1,30 +1,32 @@
-# Tailwind CSS example
+# Random Tailwind Gradient generator 🌈
 
-This example is a basic starting point for using [Tailwind CSS](https://tailwindcss.com) with Next.js.
+![Cover](https://random-tailwind-gradient.vercel.app/cover.png)
 
-## Deploy your own
+## Running the project
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+- `yarn install` to install dependencies
+- `yarn dev` to run it locally
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+## API
 
-## How to use
+The endpoints are at `/api`.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+- `/api/tw` - returns the tailwind classes. Example: `bg-gradient-to-br from-red-300 to-blue-300`
+- `/api/css` - returns the CSS styles. Example:
+  ```css
+  .random-gradient {
+    background-image: linear-gradient(to bottom right, #c4b5fd, #fcd34d);
+  }
+  ```
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+They accept following query parameters.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+| Parameter | Default           | Description                                                               |
+| --------- | ----------------- | ------------------------------------------------------------------------- |
+| direction | `br`              | Direction of the gradient. Supports all Tailwind CSS gradient directions. |
+| intensity | `300`             | Intensity of the colors. Values from `100` to `900` are supported.        |
+| className | `random-gradient` | **Only for `/css`**. The name of the class containing the styles.         |
 
-## Notes
+## Contributing
 
-This example includes the following [PostCSS](https://github.com/postcss/postcss) plugins:
-
-- [tailwindcss](https://tailwindcss.com) - utility-first CSS framework
-- [autoprefixer](https://github.com/postcss/autoprefixer) - plugin to parse CSS and add vendor prefixes to CSS rules using values from [Can I Use](https://caniuse.com).
-
-To control the generated stylesheet's filesize, this example uses Tailwind CSS' [`purge` option](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css) to remove unused CSS.
+Please feel free to raise PRs and create issues for discussions and suggestions.
