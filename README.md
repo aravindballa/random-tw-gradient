@@ -27,6 +27,12 @@ They accept following query parameters.
 | intensity | `300`             | Intensity of the colors. Values from `100` to `900` are supported.        |
 | className | `random-gradient` | **Only for `/css`**. The name of the class containing the styles.         |
 
+### Example
+
+```
+https://random-tailwind-gradient.vercel.app/api/css?className=gradient&intensity=600&direction=bl
+```
+
 ## Contributing
 
 Please feel free to raise PRs and create issues for discussions and suggestions.

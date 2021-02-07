@@ -1,5 +1,4 @@
 import { getGradient, getRandomColor } from "../lib";
-
 import {
   ArrowDown,
   ArrowDownLeft,
@@ -67,7 +66,7 @@ export default function IndexPage() {
       className="min-h-screen flex flex-col px-8 mx-auto w-full"
       style={{ maxWidth: "80ch" }}
     >
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 mt-24">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 mt-16">
         Random Tailwind Gradient 🌈
       </h1>
       <div className="md:grid grid-cols-2 flex-1">
@@ -139,18 +138,31 @@ export default function IndexPage() {
         {/* RIGHT column */}
         <div>
           <div
-            ref={gradientCardRef}
             className={`${randomGradient} h-64 w-full rounded-lg shadow-lg`}
+            ref={gradientCardRef}
+            role="img"
           ></div>
           <div className="mt-4 text-gray-100">
-            <div className="text-xs font-bold uppercase text-gray-500">
+            <div className="text-xs font-bold uppercase text-gray-500 select-none">
               Tailwind Classes
             </div>
             <code className="text-sm">{randomGradient}</code>
           </div>
           <div className="mt-4 text-gray-100">
-            <div className="text-xs font-bold uppercase text-gray-500">CSS</div>
+            <div className="text-xs font-bold uppercase text-gray-500 select-none">
+              CSS
+            </div>
             <code className="text-sm">background: {css}&#59;</code>
+          </div>
+          <div className="mt-4 text-gray-500 text-xs">
+            <a
+              className="hover:underline"
+              href="https://github.com/aravindballa/random-tw-gradient/#api"
+              target="_blank"
+              rel="noreffer noopener"
+            >
+              Looking for API?
+            </a>
           </div>
         </div>
       </div>
@@ -158,7 +170,9 @@ export default function IndexPage() {
       {/* Footer */}
       <div className="mt-16 text-gray-400 text-center">
         Made with ❤️ by{" "}
-        <a href="https://twitter.com/aravindballa">Aravind Balla</a>
+        <a className="hover:underline" href="https://twitter.com/aravindballa">
+          Aravind Balla
+        </a>
       </div>
       <div className="text-gray-500 text-center text-sm mt-2">
         Powered by{" "}
@@ -177,8 +191,13 @@ export default function IndexPage() {
           </svg>
         </a>
       </div>
-      <div className="text-gray-500 text-center text-sm mt-1">
-        <a href="https://github.com/aravindballa/random-tw-gradient">
+      <div className="text-gray-500 text-center text-sm mt-1 mb-4">
+        <a
+          className="hover:underline"
+          href="https://github.com/aravindballa/random-tw-gradient"
+          target="_blank"
+          rel="noreffer noopener"
+        >
           Source on GitHub <Github className="h-3 inline" />
         </a>
       </div>
