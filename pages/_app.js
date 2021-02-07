@@ -5,7 +5,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Random Tailwind Gradient 🌈</title>
+        <title>Random Tailwind Gradient</title>
       </Head>
       <Component {...pageProps} />;
     </>
