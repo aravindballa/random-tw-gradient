@@ -1,10 +1,6 @@
 @tailwind base;
-
-/* Write your own custom base styles here */
-
-/* Start purging... */
 @tailwind components;
-/* Stop purging. */
+@tailwind utilities;
 
 html,
 body {
@@ -15,9 +11,3 @@ body {
 .slider::-webkit-slider-thumb {
   @apply appearance-none bg-purple-400 w-4 h-4 rounded-full;
 }
-
-/* Start purging... */
-@tailwind utilities;
-/* Stop purging. */
-
-/* Your own custom utilities */
