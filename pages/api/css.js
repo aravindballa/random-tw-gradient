@@ -3,6 +3,8 @@ import postcss from "postcss";
 import tailwindcss from "tailwindcss";
 import postcssCssVariables from "postcss-css-variables";
 
+import tailwindConfig from "../../tailwind.config";
+
 import { getRandomColor, getGradient } from "../../lib";
 
 export default async function handler(req, res) {
@@ -26,7 +28,10 @@ export default async function handler(req, res) {
     direction
   );
 
-  const { css } = await postcss([tailwindcss, postcssCssVariables]).process(`
+  const { css } = await postcss([
+    new tailwindcss({ config: tailwindConfig }),
+    postcssCssVariables,
+  ]).process(`
     .${className} {
       @apply ${gradientString};
     }
